@@ -11,7 +11,6 @@ import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ServerSection } from "@/components/server/serverSection";
 import { ServerChannel } from "./serverChannel";
-import { ServerMember } from "./serverMember";
 
 
 interface ServerSidebarProps {
@@ -22,14 +21,6 @@ const iconMap = {
     [channelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
     [channelType.AUDIO]: <Mic className="mr-2 h-4 w-4" />,
     [channelType.VIDEO]: <Video className="mr-2 h-4 w-4" />,
-}
-
-const roleIconMap = {
-    [memberRole.GUEST]: null,
-    [memberRole.MODERATOR]: <ShieldCheck className="mr-2 h-4 w-4 text-indigo-500" />,
-    [memberRole.ADMIN]: <ShieldAlert className="mr-2 h-4 w-4 text-rose-500" />,
-
-
 }
 
 const ServerSidebar = async ({
@@ -65,7 +56,6 @@ const ServerSidebar = async ({
     const textChannels = server?.channels.filter((channel) => channel.type === channelType.TEXT);
     const audioChannels = server?.channels.filter((channel) => channel.type === channelType.AUDIO);
     const videoChannels = server?.channels.filter((channel) => channel.type === channelType.VIDEO);
-    const members = server?.members.filter((member) => member.profileId !== profile.id);
 
     if (!server) {
         return redirect('/');
@@ -110,15 +100,6 @@ const ServerSidebar = async ({
                                     id: channel.id,
                                     name: channel.name,
                                     icon: iconMap[channel.type]
-                                }))
-                            },
-                            {
-                                label: 'Members',
-                                type: 'member',
-                                data: members?.map((member) => ({
-                                    id: member.id,
-                                    name: member.profile.name,
-                                    icon: roleIconMap[member.role]
                                 }))
                             },
                         ]}
@@ -186,26 +167,6 @@ const ServerSidebar = async ({
                             ))}
 
                         </div>
-                    </div>
-                )}
-                {!!members?.length && (
-                    <div className="mb-2">
-                        <ServerSection
-                            sectionType="members"
-                            role={role}
-                            label="Members"
-                            server={server}
-                        />
-                        <div className="space-y-[2px]">
-                            {members.map((member) => (
-                                <ServerMember
-                                    key={member.id}
-                                    member={member}
-                                    server={server}
-                                />
-                            ))}
-                        </div>
-
                     </div>
                 )}
             </ScrollArea>

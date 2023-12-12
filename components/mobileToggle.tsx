@@ -1,4 +1,4 @@
-import { Menu } from "lucide-react";
+import { Menu, Users } from "lucide-react";
 
 import {
     Sheet,
@@ -8,21 +8,38 @@ import {
 import { Button } from "@/components/ui/button";
 import { NavigationSideBar } from "@/components/navigation/navigationSidebar";
 import ServerSidebar from "@/components/server/serverSidebar";
+import ServerSidebarRight from "@/components/server/serverSidebarRight ";
 
-export const MobileToggle = ({ serverId }: { serverId: string }) => {
+export const MobileToggle = ({ serverId, side }: { serverId: string, side: "left" | "right" }) => {
+
     return (
-        <Sheet>
-            <SheetTrigger asChild>
-                <Button variant='ghost' size='icon' className="md:hidden">
-                    <Menu />
-                </Button>
-            </SheetTrigger>
-            <SheetContent side='left' className="p-0 flex gap-0">
-                <div className="w-[72px]">
-                    <NavigationSideBar />
-                </div>
-                <ServerSidebar serverId={serverId} />
-            </SheetContent>
-        </Sheet>
+        side === "left"
+            ?
+            (
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <Button variant='ghost' size='icon' className="md:hidden ml-2">
+                            <Menu />
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side={side} className="p-0 flex gap-0">
+                        <div className="w-[72px]">
+                            <NavigationSideBar />
+                        </div>
+                        <ServerSidebar serverId={serverId} />
+                    </SheetContent>
+                </Sheet>
+            ) : (
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <Button variant='ghost' size='icon' className=" ml-2">
+                            <Users />
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side={side} className="p-0 flex gap-0">
+                        <ServerSidebarRight serverId={serverId} />
+                    </SheetContent>
+                </Sheet>
+            )
     );
 }
