@@ -24,5 +24,3 @@ This app is kind of copy of Discord build using NextJs 14, Typescript, MongoDB, 
 ## Author
 **Sumit Goyal**
 
-## Reference
-[Code With Antonio's discord-clone](https://github.com/AntonioErdeljac/next13-discord-clone) with difference in database and style
