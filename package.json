@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "combine": "npm install & next build"
+    "combine": "npm install && next build"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.27.5",
