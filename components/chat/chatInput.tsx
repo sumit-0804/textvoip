@@ -5,7 +5,7 @@ import axios from "axios";
 import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, Send, SendHorizonal, SendIcon } from "lucide-react";
+import { Plus, SendHorizonal, } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useModal } from "@/hooks/useModalStore";
 import { EmojiPicker } from "@/components/emojiPicker";
-import { Button } from "../ui/button";
+
 
 
 interface ChatInputProps {
