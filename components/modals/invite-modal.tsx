@@ -2,9 +2,7 @@
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
-    DialogFooter,
     DialogTitle
 } from "@/components/ui/dialog";
 import { useState } from "react";
@@ -60,9 +58,6 @@ export const InviteModal = () => {
                     <DialogTitle className="text-2xl tex-center font-bodl">
                         Invite Friends
                     </DialogTitle>
-                    <DialogDescription className=" text-center text-zinc-500">
-                        Give Server your customization with a name and an image. You can always change it later!
-                    </DialogDescription>
                 </DialogHeader>
                 <div className="p-6">
                     <Label

@@ -27,6 +27,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { FileUpload } from '@/components/file-upload';
+import { useModal } from "@/hooks/useModalStore";
 
 const formSchema = z.object({
     name: z.string().min(1, {
@@ -38,6 +39,7 @@ const formSchema = z.object({
 })
 
 export const IntialModal = () => {
+    const { onOpen } = useModal();
     const [isMounted, SetIsMounted] = useState(false);
 
     const router = useRouter();
@@ -73,8 +75,13 @@ export const IntialModal = () => {
         return null;
     }
 
+    const handleClick = () => {
+        onOpen('joinViaLink');
+        SetIsMounted(false);
+    }
+
     return (
-        <Dialog open>
+        <Dialog open={isMounted}>
             <DialogContent className="bg-white text-black p-0 overflow-hidden">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-2xl tex-center font-bodl">
@@ -116,9 +123,12 @@ export const IntialModal = () => {
                             )} />
                         </div>
                         <DialogFooter className='bg-gray-100 px-6 py-4'>
-                            <Button variant="primary" disabled={isLoading}>
-                                Create
-                            </Button>
+                            <div className="flex justify-between items-center w-full">
+                                <Button className="text-zinc-600 bg-transparent underline" onClick={handleClick} size='sm' type="button">Join Via Link</Button>
+                                <Button variant="primary" disabled={isLoading}>
+                                    Create
+                                </Button>
+                            </div>
                         </DialogFooter>
                     </form>
                 </Form>

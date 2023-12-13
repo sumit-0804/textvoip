@@ -5,6 +5,7 @@ import { Member, Profile, Server, memberRole } from "@prisma/client";
 import { ShieldAlert, ShieldCheck } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { UserAvatar } from "@/components/userAvatar";
+import { ActionTooltip } from "../actionTooltip";
 
 
 interface ServerMemberProps {
@@ -52,7 +53,9 @@ export const ServerMember = ({
             >
                 {member.profile.name}
             </p>
-            {icon}
+            <ActionTooltip label={member.role} side="top">
+                {icon}
+            </ActionTooltip>
         </button>
     )
 }
