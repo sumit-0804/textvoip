@@ -5,7 +5,7 @@ import axios from "axios";
 import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus } from "lucide-react";
+import { Plus, Send, SendHorizonal, SendIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useModal } from "@/hooks/useModalStore";
 import { EmojiPicker } from "@/components/emojiPicker";
+import { Button } from "../ui/button";
 
 
 interface ChatInputProps {
@@ -88,10 +89,11 @@ export const ChatInput = ({
                                         placeholder={`Message ${type === "conversation" ? name : "#" + name}`}
                                         {...field}
                                     />
-                                    <div className="absolute top-7 right-8">
+                                    <div className="absolute top-7 right-8 flex justify-center items-center">
                                         <EmojiPicker
                                             onChange={(emoji: string) => field.onChange(`${field.value} ${emoji}`)}
                                         />
+                                        <button className=" ml-4 bg-zinc-200/20 dark:bg-zinc-700/75 border-0 text-zinc-600 dark:text-zinc-200 transition"><SendHorizonal className="h-[24px] w-[24px]" /> </button>
                                     </div>
 
                                 </div>
