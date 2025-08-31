@@ -1,12 +1,18 @@
 import {auth} from "@clerk/nextjs";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
+
+export const dynamic = 'force-dynamic';
  
 const f = createUploadthing();
  
 const handleAuth = () =>{
-    const {userId} = auth();
-    if(!userId) throw new Error("Unauthorized");
-    return {userId : userId};
+    try {
+        const {userId} = auth();
+        if(!userId) throw new Error("Unauthorized");
+        return {userId : userId};
+    } catch (error) {
+        throw new Error("Unauthorized");
+    }
 }
  
 export const ourFileRouter = {

@@ -5,6 +5,8 @@ import { currentProfile } from "@/lib/current-profile";
 import {db} from '@/lib/db'
 import { memberRole } from '@prisma/client';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req:Request) {
     try {
 

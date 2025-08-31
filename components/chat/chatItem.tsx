@@ -116,7 +116,7 @@ export const ChatItem = ({
             content: content,
         })
 
-    }, [content])
+    }, [content, form])
 
     const fileType = fileUrl?.split(".").pop();
 

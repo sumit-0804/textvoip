@@ -4,6 +4,8 @@ import { memberRole } from "@prisma/client";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(
     req:Request    
 ) {
@@ -24,6 +26,18 @@ export async function POST(
 
         if(name === 'general'){
             return new NextResponse('Name cannot be "general"', {status:400});
+        }
+
+        // Check if a channel with the same name already exists in this server
+        const existingChannel = await db.channel.findFirst({
+            where: {
+                serverId: serverId,
+                name: name
+            }
+        });
+
+        if(existingChannel){
+            return new NextResponse('Channel with this name already exists', {status:400});
         }
 
         const server = await db.server.update({

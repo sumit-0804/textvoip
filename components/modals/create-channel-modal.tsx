@@ -35,7 +35,8 @@ import {
     SelectValue
 } from "@/components/ui/select";
 import { channelType as ChannelType } from "@prisma/client";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { AlertCircle } from "lucide-react";
 
 const formSchema = z.object({
     name: z.string().min(1, {
@@ -53,6 +54,7 @@ export const CreateChannelModal = () => {
     const { isOpen, onClose, type, data } = useModal();
     const router = useRouter();
     const params = useParams();
+    const [error, setError] = useState<string | null>(null);
 
     const isModalOpen = isOpen && type === 'createChannel';
     const { channelType } = data;
@@ -78,6 +80,7 @@ export const CreateChannelModal = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
+            setError(null);
             const url = qs.stringifyUrl({
                 url: '/api/channels',
                 query: {
@@ -90,14 +93,19 @@ export const CreateChannelModal = () => {
             form.reset();
             router.refresh();
             onClose();
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
-
+            if (error.response?.data) {
+                setError(error.response.data);
+            } else {
+                setError('Something went wrong');
+            }
         }
     }
 
     const handleClose = () => {
         form.reset();
+        setError(null);
         onClose();
     }
 
@@ -122,6 +130,10 @@ export const CreateChannelModal = () => {
                                             className='bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0'
                                             placeholder="Enter Channel Name"
                                             {...field}
+                                            onChange={(e) => {
+                                                field.onChange(e);
+                                                setError(null);
+                                            }}
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -164,6 +176,12 @@ export const CreateChannelModal = () => {
                                     </FormItem>
                                 )}
                             />
+                            {error && (
+                                <div className="flex items-center gap-x-2 text-red-500 text-sm px-6">
+                                    <AlertCircle className="h-4 w-4" />
+                                    {error}
+                                </div>
+                            )}
                         </div>
                         <DialogFooter className='bg-gray-100 px-6 py-4'>
                             <Button variant="primary" disabled={isLoading}>
