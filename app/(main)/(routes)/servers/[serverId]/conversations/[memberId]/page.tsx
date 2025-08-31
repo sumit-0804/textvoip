@@ -58,7 +58,7 @@ const MemberIdPage = async ({
     return (
         <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
             <ChatHeader
-                imageUrl={otherMember.profile.imageUrl} // Updated from imageURL
+                imageUrl={otherMember.profile.imageURL} // Updated from imageURL
                 name={otherMember.profile.name}
                 severId={params.serverId}
                 type="conversation"
