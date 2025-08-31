@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { redirectToSignIn } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server"; // Updated import
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
@@ -16,14 +16,14 @@ interface ChannelIdPageProps {
     }
 }
 
-
 const ChannelIdPage = async ({
     params
 }: ChannelIdPageProps) => {
-
     const profile = await currentProfile();
 
     if (!profile) {
+        // In v6, get redirectToSignIn from auth()
+        const { redirectToSignIn } = await auth();
         return redirectToSignIn();
     }
 
@@ -76,7 +76,6 @@ const ChannelIdPage = async ({
                             serverId: channel.serverId
                         }}
                     />
-
                 </>
             )}
             {channel.type === channelType.AUDIO && (

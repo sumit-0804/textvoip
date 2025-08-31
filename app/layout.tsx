@@ -22,12 +22,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider dynamic>
       <html lang="en" suppressHydrationWarning>
         <head>
-          <title>
-            TextVoip
-          </title>
+          <title>TextVoip</title>
         </head>
         <body className={cn(font.className, "bg-white dark:bg-[#313338]")}>
           <ThemeProvider
@@ -42,7 +40,8 @@ export default function RootLayout({
                 {children}
               </QueryProvider>
             </SocketProvider>
-          </ThemeProvider></body>
+          </ThemeProvider>
+        </body>
       </html>
     </ClerkProvider>
   )

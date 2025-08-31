@@ -10,7 +10,7 @@
     "combine": "npm install && next build"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.27.5",
+    "@clerk/nextjs": "^6.31.6",
     "@emoji-mart/data": "^1.1.2",
     "@emoji-mart/react": "^1.1.1",
     "@hookform/resolvers": "^3.3.2",
@@ -38,7 +38,7 @@
     "livekit-client": "^1.15.4",
     "livekit-server-sdk": "^1.2.7",
     "lucide-react": "^0.294.0",
-    "next": "14.0.4",
+    "next": "14.2.32",
     "next-themes": "^0.2.1",
     "query-string": "^8.1.0",
     "react": "^18",

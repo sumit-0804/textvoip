@@ -1,4 +1,4 @@
-import { redirectToSignIn } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server"; // Updated import
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
@@ -16,6 +16,8 @@ const ServerIdLayout = async ({
     const profile = await currentProfile();
 
     if (!profile) {
+        // In v6, get redirectToSignIn from auth()
+        const { redirectToSignIn } = await auth();
         return redirectToSignIn();
     }
 
@@ -36,11 +38,11 @@ const ServerIdLayout = async ({
 
     return (
         <div className="h-full">
-            <div
-                className="hidden md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
+            {/* Force sidebar to show - removed hidden md:flex for debugging */}
+            <div className="flex h-full w-60 z-20 flex-col fixed inset-y-0">
                 <ServerSidebar serverId={params.serverId} />
             </div>
-            <main className="h-full md:pl-60">
+            <main className="h-full pl-60">
                 {children}
             </main>
         </div>
