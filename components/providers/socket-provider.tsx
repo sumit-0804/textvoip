@@ -43,7 +43,7 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
 
         const socketUrl = process.env.NODE_ENV === 'production' 
             ? process.env.NEXT_PUBLIC_SITE_URL! 
-            : "http://localhost:3000";
+            : "http://localhost:3000"!;
 
         const socketInstance: Socket = ClientIO(socketUrl, {
             path: "/api/socket/io",
