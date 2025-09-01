@@ -36,7 +36,7 @@ const ServerIdLayout = async ({
   return (
     <div className="h-full flex">
       {/* Sidebar - hidden on mobile, visible on md+ */}
-      <div className="md:flex sm:hidden h-full w-60 z-20 flex-col fixed inset-y-0">
+      <div className="md:flex max-sm:hidden  h-full w-60 z-20 flex-col fixed inset-y-0">
         <ServerSidebar serverId={params.serverId} />
       </div>
 
