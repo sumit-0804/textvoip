@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server"; // Updated import
+import { auth } from "@clerk/nextjs/server";
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
@@ -22,7 +22,6 @@ const ChannelIdPage = async ({
     const profile = await currentProfile();
 
     if (!profile) {
-        // In v6, get redirectToSignIn from auth()
         const { redirectToSignIn } = await auth();
         return redirectToSignIn();
     }

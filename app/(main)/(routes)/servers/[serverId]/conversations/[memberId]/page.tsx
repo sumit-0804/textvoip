@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server"; // Updated import
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import { currentProfile } from "@/lib/current-profile";
@@ -26,7 +26,6 @@ const MemberIdPage = async ({
     const profile = await currentProfile();
 
     if (!profile) {
-        // In v6, get redirectToSignIn from auth()
         const { redirectToSignIn } = await auth();
         return redirectToSignIn();
     }
@@ -58,7 +57,7 @@ const MemberIdPage = async ({
     return (
         <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
             <ChatHeader
-                imageUrl={otherMember.profile.imageURL} // Updated from imageURL
+                imageUrl={otherMember.profile.imageURL}
                 name={otherMember.profile.name}
                 severId={params.serverId}
                 type="conversation"

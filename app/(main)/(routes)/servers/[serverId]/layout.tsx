@@ -1,10 +1,10 @@
-import { auth } from "@clerk/nextjs/server"; // Updated import
+import { auth } from "@clerk/nextjs/server";
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import ServerSidebar from "@/components/server/serverSidebar";
-import ServerSidebarRight from "@/components/server/serverSidebarRight ";
+// import ServerSidebarRight from "@/components/server/serverSidebarRight";
 
 const ServerIdLayout = async ({
     children,
@@ -16,7 +16,6 @@ const ServerIdLayout = async ({
     const profile = await currentProfile();
 
     if (!profile) {
-        // In v6, get redirectToSignIn from auth()
         const { redirectToSignIn } = await auth();
         return redirectToSignIn();
     }
@@ -38,10 +37,11 @@ const ServerIdLayout = async ({
 
     return (
         <div className="h-full">
-            {/* Force sidebar to show - removed hidden md:flex for debugging */}
+            {/* Server sidebar - always show except on very small mobile */}
             <div className="flex h-full w-60 z-20 flex-col fixed inset-y-0">
                 <ServerSidebar serverId={params.serverId} />
             </div>
+            {/* Main content - always has padding for server sidebar */}
             <main className="h-full pl-60">
                 {children}
             </main>
